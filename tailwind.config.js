@@ -6,7 +6,7 @@ export default {
       colors: {
         orenge: "#FFD506",
         red: "#FF6868",
-        secondry: "#555",
+        secondary: "#555",
         primaryBg: "#FCFCFC",
       },
       fontFamily: {

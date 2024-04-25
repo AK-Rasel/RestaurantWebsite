@@ -5,7 +5,7 @@ import image14 from "../../public/image/image 14.png";
 
 const Banner = () => {
   return (
-    <div className="section-container bg-gradient-r from-[#FAFAFA] from-0% to-[#FCFCFC] to-100%">
+    <div className="section-container bg-gradient-r from-[#FAFAFA] from-0% to-[#FCFCFC] to-100% m-0">
       <div className="py-24 flex flex-col md:flex-row-reverse justify-between items-center gap-8">
         {/* image */}
         <div className="md:w-1/2">
@@ -17,7 +17,7 @@ const Banner = () => {
               <img src={image13} alt="" className="rounded-2xl" />
               <div className="space-y-1">
                 <h5 className="font-medium">Spicy noodles</h5>
-                {/* reting */}
+                {/* rating */}
                 <div className="rating rating-sm">
                   <input
                     type="radio"
@@ -53,10 +53,10 @@ const Banner = () => {
             </div>
             {/* card second */}
             <div className="bg-white sm:flex hidden py-2 px-3 rounded-2xl items-center gap-3 shadow-md w-64">
-              <img src={image13} alt="" className="rounded-2xl" />
+              <img src={image14} alt="" className="rounded-2xl" />
               <div className="space-y-1">
                 <h5 className="font-medium">Spicy noodles</h5>
-                {/* reting */}
+                {/* rating */}
                 <div className="rating rating-sm">
                   <input
                     type="radio"
