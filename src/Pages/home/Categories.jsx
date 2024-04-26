@@ -32,10 +32,11 @@ const Categories = () => {
         <p className="subtitle">Customer Favorites</p>
         <h2 className="title">Popular Catagories</h2>
       </div>
+
       {/* Heading end ------ */}
 
       {/*categories card ------start*/}
-      <div className="flex flex-col gap-7 gap-y-7 md:flex-row flex-wrap justify-around mt-12 ">
+      <div className="flex flex-col  gap-y-7 md:flex-row flex-wrap justify-around mt-12 ">
         {categoryItems?.map((item, id) => (
           <div
             key={id}

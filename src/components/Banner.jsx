@@ -23,27 +23,32 @@ const Banner = () => {
                     type="radio"
                     name="rating-2"
                     className="mask mask-star-2 bg-yellow-400"
+                    readOnly
                   />
                   <input
                     type="radio"
                     name="rating-2"
                     className="mask mask-star-2 bg-yellow-400"
                     checked
+                    readOnly
                   />
                   <input
                     type="radio"
                     name="rating-2"
                     className="mask mask-star-2 bg-yellow-400"
+                    readOnly
                   />
                   <input
                     type="radio"
                     name="rating-2"
                     className="mask mask-star-2 bg-yellow-400"
+                    readOnly
                   />
                   <input
                     type="radio"
                     name="rating-2"
                     className="mask mask-star-2 bg-yellow-400"
+                    readOnly
                   />
                 </div>
                 <p>
@@ -62,27 +67,32 @@ const Banner = () => {
                     type="radio"
                     name="rating-2"
                     className="mask mask-star-2 bg-yellow-400"
+                    readOnly
                   />
                   <input
                     type="radio"
                     name="rating-2"
                     className="mask mask-star-2 bg-yellow-400"
                     checked
+                    readOnly
                   />
                   <input
                     type="radio"
                     name="rating-2"
                     className="mask mask-star-2 bg-yellow-400"
+                    readOnly
                   />
                   <input
                     type="radio"
                     name="rating-2"
                     className="mask mask-star-2 bg-yellow-400"
+                    readOnly
                   />
                   <input
                     type="radio"
                     name="rating-2"
                     className="mask mask-star-2 bg-yellow-400"
+                    readOnly
                   />
                 </div>
                 <p>
@@ -96,13 +106,13 @@ const Banner = () => {
         <div className="md:w-1/2 space-y-7 px-4">
           <h2 className="md:text-5xl text-4xl font-bold leading-snug">
             Dive into Delights Of Delectable{" "}
-            <span className="text-orenge">Food</span>
+            <span className="text-orange">Food</span>
           </h2>
           <p className="text-xl text-[#4A4A4A] ">
             Where Each Plate Weaves a Story of Culinary Mastery and Passionate
             Craftsmanship
           </p>
-          <button className="btn rounded-full px-4 hover:bg-transparent hover:border-orenge  bg-orenge">
+          <button className="btn rounded-full px-4 hover:bg-transparent hover:border-orange  bg-orange">
             Order Now
           </button>
         </div>

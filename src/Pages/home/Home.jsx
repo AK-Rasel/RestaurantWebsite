@@ -1,13 +1,14 @@
 import React from "react";
 import Banner from "../../components/Banner";
 import Categories from "./Categories";
+import SpecialDishes from "./SpecialDishes";
 
 const Home = () => {
   return (
     <div>
-      {/* ?banner */}
       <Banner />
       <Categories />
+      <SpecialDishes />
     </div>
   );
 };
