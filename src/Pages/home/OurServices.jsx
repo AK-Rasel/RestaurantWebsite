@@ -28,7 +28,7 @@ const serviceList = [
 ];
 export const OurServices = () => {
   return (
-    <div className="section-container">
+    <div className="section-container py-16">
       <div className="flex flex-col md:flex-row items-center justify-between gap-12">
         {/* text----start */}
         <div className="md:w-1/2">
