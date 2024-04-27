@@ -55,7 +55,7 @@ export const OurServices = () => {
                 key={services.id}
                 className="shadow-md rounded-sm py-5 px-4 text-center space-y-2
               text-orange cursor-pointer
-              hover:border-orange transition-all duration-200 hover:border"
+              "
               >
                 <img
                   src={services.image}

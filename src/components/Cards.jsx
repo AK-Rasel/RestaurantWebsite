@@ -11,7 +11,7 @@ const Cards = ({ item }) => {
   };
   return (
     <div>
-      <div className="card w-96 my-5 bg-base-100 shadow-xl relative">
+      <div className="card  my-5 bg-base-100 shadow-xl relative">
         {/* heard ----start */}
         <div
           className={`rating gap-1 absolute right-2 top-2 p-4 heartStar bg-orange ${

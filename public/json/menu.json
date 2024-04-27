@@ -9,7 +9,7 @@
   },
   {
     "_id": "642c155b2c4774f05c36eeb9",
-    "name": "Haddock",
+    "name": "A Haddock",
     "recipe": "Chargrilled fresh tuna steak (served medium rare) on classic Niçoise salad with French beans.",
     "image": "../image/card/Fattoush salad.png",
     "category": "drinks",
@@ -89,7 +89,7 @@
   },
   {
     "_id": "642c155b2c4774f05c36eea6",
-    "name": "Chicken and Walnut Salad",
+    "name": "A Chicken and Walnut Salad",
     "recipe": "Pan roasted pork belly with gratin potato, braised Savoy cabbage, apples, thyme and calvados jus",
     "image": "../image/card/Vegetable salad.png",
     "category": "salad",
