@@ -32,6 +32,7 @@ const Menu = () => {
         ? menu
         : menu?.filter((item) => item.category === category);
     setFilteredItem(filtered);
+    console.log(category);
     setSelectedCategory(category);
     setCurrentPage(1);
   };
@@ -161,14 +162,14 @@ const Menu = () => {
         </div>
 
         {/* product card */}
-        <div className=" grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-4">
+        <div className=" grid   md:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-4">
           {currentItems?.map((item) => (
             <Cards key={item._id} item={item} />
           ))}
         </div>
       </div>
       {/* pagination btn */}
-      <div className="flex justify-center my-8">
+      <div className="flex  justify-center my-8">
         {Array.from({
           length: Math.ceil(filteredItem.length / itemPerPage),
         }).map((_, index) => (

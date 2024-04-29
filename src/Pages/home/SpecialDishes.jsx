@@ -108,10 +108,10 @@ const SpecialDishes = () => {
       <Slider
         ref={slider}
         {...settings}
-        className="overflow-hidden mt-10 space-x-2 "
+        className="overflow-hidden  space-x-2 "
       >
         {recipes?.map((item, i) => (
-          <Cards key={i} item={item} />
+          <Cards key={i} w96="w-96" item={item} />
         ))}
       </Slider>
       {/* slider---end */}
