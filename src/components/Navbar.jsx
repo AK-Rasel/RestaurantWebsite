@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import logo from "../../public/SVG/icon&font.svg";
-import { LuPhoneCall } from "react-icons/lu";
+import { FaRegUser } from "react-icons/fa";
+import Modal from "./Modal";
 
 const Navbar = () => {
   const [isSticky, setSticky] = useState(false);
@@ -41,7 +42,7 @@ const Navbar = () => {
           </ul>
         </details>
       </li>
-      {/* servies */}
+      {/* services */}
       <li>
         <details>
           <summary>Services</summary>
@@ -170,10 +171,14 @@ const Navbar = () => {
               </div>
             </div>
           </div>
-          {/* button */}
-          <a className="btn rounded-full px-4 hover:bg-transparent hover:border-orange  bg-orange">
-            <LuPhoneCall /> Contact
-          </a>
+          {/* login button */}
+          <button
+            onClick={() => document.getElementById("my_modal_5").showModal()}
+            className="btn rounded-full px-4 hover:bg-transparent hover:border-orange  bg-orange"
+          >
+            <FaRegUser /> Login
+          </button>
+          <Modal />
         </div>
       </div>
     </header>
