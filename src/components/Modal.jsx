@@ -13,12 +13,12 @@ const Modal = () => {
 
   const onSubmit = (data) => console.log(data);
   return (
-    <dialog id="my_modal_5" className="modal  modal-middle">
+    <dialog id="my_modal_5" className="modal   modal-middle sm:modal-middle">
       <div className="modal-box">
         <div className="modal-action mt-0 flex flex-col justify-center">
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="card-body"
+            className="card-body  p-0"
             method="dialog"
           >
             <h3 className="font-bold">Login Now!</h3>
@@ -33,7 +33,7 @@ const Modal = () => {
                 {...register("email")}
               />
             </div>
-            <div className="form-control space-y-2">
+            <div className="form-control ">
               <label className="label">
                 <span className="label-text">Password</span>
               </label>
@@ -43,7 +43,7 @@ const Modal = () => {
                 className="input input-bordered"
                 {...register("password")}
               />
-              <label className="label">
+              <label className="label mt-1">
                 <a href="#" className="label-text-alt mt-2 link link-hover">
                   Forgot password?
                 </a>
@@ -56,12 +56,26 @@ const Modal = () => {
               <input
                 type="submit"
                 value="Login"
-                className="btn   hover:bg-transparent hover:border-orange  bg-orange "
+                className="btn     bg-orange "
               />
             </div>
-            <p className="text-center mt-4">
+
+            {/* if there is a button in form, it will close the modal */}
+            <button
+              htmlFor="my_modal_5"
+              onClick={() => document.getElementById("my_modal_5").close()}
+              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+            >
+              ✕
+            </button>
+            <p className="text-center my-2 ">
               New here?{" "}
-              <Link to="/signup" className="text-red hover:underline ">
+              <Link
+                htmlFor="my_modal_5"
+                onClick={() => document.getElementById("my_modal_5").close()}
+                to="/signup"
+                className="text-red hover:underline "
+              >
                 Create a New Account
               </Link>
             </p>

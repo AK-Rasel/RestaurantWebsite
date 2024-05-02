@@ -54,7 +54,7 @@ export const OurServices = () => {
               <div
                 key={services.id}
                 className="shadow-md rounded-sm py-5 px-4 text-center space-y-2
-              text-orange cursor-pointer
+               cursor-pointer
               "
               >
                 <img
@@ -62,8 +62,10 @@ export const OurServices = () => {
                   alt={services.title}
                   className="mx-auto"
                 />
-                <h5 className="pt-3 font-semibold">{services.title}</h5>
-                <p className="text-[#d4c578]">{services.des}</p>
+                <h5 className="pt-3 text-red font-semibold">
+                  {services.title}
+                </h5>
+                <p className="text-[#CA9494]">{services.des}</p>
               </div>
             ))}
           </div>
