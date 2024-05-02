@@ -9,7 +9,7 @@ const Cards = ({ item, w96 }) => {
   const handleHeartClick = () => {
     setIsHeartFilled(!isHeartFilled);
   };
-  console.log(w96);
+
   return (
     <div>
       <div

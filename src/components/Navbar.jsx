@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import logo from "../../public/SVG/icon&font.svg";
 import { FaRegUser } from "react-icons/fa";
 import Modal from "./Modal";
+import { AuthContext } from "../context/AuthProvider";
 
 const Navbar = () => {
   const [isSticky, setSticky] = useState(false);

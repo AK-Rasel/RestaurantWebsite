@@ -1,17 +1,51 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Modal from "./Modal";
+import { AuthContext } from "../context/AuthProvider";
 
 const Signup = () => {
+  // google login
+  const { singUpWithGmail, creteUser } = useContext(AuthContext);
+  // redirection to home or specify page
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
+  const handelEmailLogin = () => {
+    singUpWithGmail()
+      .then((result) => {
+        const user = result.user;
+        navigate(from, { replace: true });
+        console.log(user);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  // create user
+  const onSubmit = (data) => {
+    const email = data.email;
+    const password = data.password;
+    console.log(email, password);
+    creteUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        alert("sing successfully");
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
+  };
   return (
     <div className="max-w-lg pb-10 mt-56 bg-white shadow w-full mx-auto flex items-center justify-center my-40">
       <div className="modal-action mt-0 flex flex-col justify-center">
@@ -61,7 +95,7 @@ const Signup = () => {
               onClick={() => document.getElementById("my_modal_5").showModal()}
               className="text-red hover:underline "
             >
-              Login
+              Sing Up
             </button>
           </p>
           {/* if there is a button in form, it will close the modal */}
@@ -75,7 +109,7 @@ const Signup = () => {
         </form>
         {/* social*/}
         <div className="text-center space-x-4">
-          <button className="btn btn-circle">
+          <button className="btn btn-circle" onClick={handelEmailLogin}>
             <FaGoogle />
           </button>
           <button className="btn btn-circle">
