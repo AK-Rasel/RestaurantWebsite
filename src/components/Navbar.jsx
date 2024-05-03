@@ -3,10 +3,13 @@ import logo from "../../public/SVG/icon&font.svg";
 import { FaRegUser } from "react-icons/fa";
 import Modal from "./Modal";
 import { AuthContext } from "../context/AuthProvider";
+import { Profile } from "./Profile";
 
 const Navbar = () => {
   const [isSticky, setSticky] = useState(false);
-  // handle scroll handle fuctions
+  const { user } = useContext(AuthContext);
+  console.log(user);
+  // handle scroll handle functions
   useEffect(() => {
     const scrollHandle = () => {
       const offset = window.scrollY;
@@ -173,12 +176,17 @@ const Navbar = () => {
             </div>
           </div>
           {/* login button */}
-          <button
-            onClick={() => document.getElementById("my_modal_5").showModal()}
-            className="btn rounded-full px-4 hover:bg-transparent hover:border-orange  bg-orange"
-          >
-            <FaRegUser /> Login
-          </button>
+          {user ? (
+            <Profile user={user} />
+          ) : (
+            <button
+              onClick={() => document.getElementById("my_modal_5").showModal()}
+              className="btn rounded-full px-4 hover:bg-transparent hover:border-orange  bg-orange"
+            >
+              <FaRegUser /> Login
+            </button>
+          )}
+
           <Modal />
         </div>
       </div>

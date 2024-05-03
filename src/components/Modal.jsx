@@ -23,7 +23,7 @@ const Modal = () => {
         const user = result.user;
         alert("login successfully");
         console.log(user);
-
+        document.getElementById("my_modal_5").close();
         navigate(from, { replace: true });
       })
       .catch((error) => {
