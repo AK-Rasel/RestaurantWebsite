@@ -74,6 +74,7 @@ const AuthProvider = ({ children }) => {
     singUpWithGmail,
     logout,
     updateUserProfile,
+    loading,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
