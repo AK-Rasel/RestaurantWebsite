@@ -50,7 +50,7 @@ const Navbar = () => {
       <li>
         <details>
           <summary>Services</summary>
-          <ul className="p-2">
+          <ul className="p-2 w-40">
             <li>
               <a>Online Order</a>
             </li>
