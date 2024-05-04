@@ -1,13 +1,17 @@
 /* eslint-disable react/prop-types */
 import React, { useContext } from "react";
 import { AuthContext } from "../context/AuthProvider";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
 export const Profile = ({ user }) => {
   const { logout } = useContext(AuthContext);
+  const navigate = useNavigate();
   const handleLogout = () => {
     logout().then((result) => {
-      alert("logout successfully").catch((error) => {
+      navigate("/signup");
+      toast.success("Successfully Logout").catch((error) => {
         alert("logout failed");
       });
     });
@@ -56,7 +60,13 @@ export const Profile = ({ user }) => {
               <a>Setting</a>
             </li>
             <li>
-              <button onClick={handleLogout}>Logout</button>
+              <button
+                htmlFor="my-drawer-4"
+                aria-label="close sidebar"
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
             </li>
           </ul>
         </div>

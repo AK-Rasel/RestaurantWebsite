@@ -30,16 +30,19 @@ const AuthProvider = ({ children }) => {
 
   // login user email and password
   const login = (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   // sing up gmail
   const singUpWithGmail = () => {
+    setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
 
   // logout
   const logout = () => {
+    setLoading(true);
     return signOut(auth);
   };
   // update profile
@@ -54,8 +57,8 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
-        setUser(currentUser);
         setLoading(false);
+        setUser(currentUser);
         // ...
       } else {
         // User is signed out

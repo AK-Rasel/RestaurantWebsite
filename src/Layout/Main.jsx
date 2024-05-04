@@ -5,23 +5,18 @@ import Footer from "../components/Footer";
 import "../index.css";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthProvider";
-import LoadingSpinner from "../components/LoadingSpinner";
+import { Toaster } from "react-hot-toast";
 
 const Main = () => {
-  const { loading } = useContext(AuthContext);
+  const { loading, user } = useContext(AuthContext);
   return (
     <div>
-      {loading ? (
-        <LoadingSpinner />
-      ) : (
-        <div>
-          <Navbar />
-          <div className="min-h-screen">
-            <Outlet />
-          </div>
-          <Footer />
-        </div>
-      )}
+      <Navbar />
+      <div className="min-h-screen">
+        <Outlet />
+      </div>
+      <Footer />
+      <Toaster className="z-50" position="bottom-left" reverseOrder={false} />
     </div>
   );
 };

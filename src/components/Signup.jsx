@@ -4,6 +4,7 @@ import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Modal from "./Modal";
 import { AuthContext } from "../context/AuthProvider";
+import toast from "react-hot-toast";
 
 const Signup = () => {
   // google login
@@ -16,6 +17,7 @@ const Signup = () => {
     singUpWithGmail()
       .then((result) => {
         const user = result.user;
+        toast.success("login successfully");
         navigate(from, { replace: true });
         console.log(user);
       })
@@ -38,12 +40,15 @@ const Signup = () => {
     creteUser(email, password)
       .then((result) => {
         const user = result.user;
-        alert("sing successfully");
+        toast.success("sing successfully");
         navigate(from, { replace: true });
       })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+      .catch((err) => {
+        toast.error("This didn't work.");
+        const errorCode = err.code;
+        const errorMessage = err.message;
+        // toast.error(errorMessage);
+        // alert(errorCode);
       });
   };
   return (
@@ -75,7 +80,6 @@ const Signup = () => {
               placeholder="password"
               className="input input-bordered"
               {...register("password")}
-              required
             />
             <label className="label mt-1">
               <a href="#" className="label-text-alt mt-2 link link-hover">
@@ -87,7 +91,11 @@ const Signup = () => {
 
           {/* login button */}
           <div className="form-control mt-6">
-            <input type="submit" value="Login" className="btn     bg-orange " />
+            <input
+              type="submit"
+              value="Sign Up"
+              className="btn     bg-orange "
+            />
           </div>
           <p className="text-center my-2 ">
             Have an account?
@@ -95,17 +103,17 @@ const Signup = () => {
               onClick={() => document.getElementById("my_modal_5").showModal()}
               className="text-red hover:underline "
             >
-              Sing Up
+              Login
             </button>
           </p>
           {/* if there is a button in form, it will close the modal */}
-          <Link
-            to="/"
+          <a
+            href="/"
             title="Home"
             className="btn  text-red border border-red btn-sm btn-circle btn-ghost absolute right-10 top-10"
           >
             ✕
-          </Link>
+          </a>
         </form>
         {/* social*/}
         <div className="text-center space-x-4">

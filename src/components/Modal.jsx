@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { FaFacebook, FaGit, FaGithub, FaGoogle } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthProvider";
+import toast from "react-hot-toast";
 
 const Modal = () => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -21,7 +22,8 @@ const Modal = () => {
     singUpWithGmail()
       .then((result) => {
         const user = result.user;
-        alert("login successfully");
+
+        toast.success("login successfully");
         console.log(user);
         document.getElementById("my_modal_5").close();
         navigate(from, { replace: true });
@@ -38,7 +40,8 @@ const Modal = () => {
     login(email, password)
       .then((result) => {
         const user = result.user;
-        alert("login successfully");
+
+        toast.success("login successfully");
         navigate(from, { replace: true });
         document.getElementById("my_modal_5").close();
         console.log(user);
