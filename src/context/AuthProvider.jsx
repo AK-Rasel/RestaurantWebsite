@@ -24,30 +24,26 @@ const AuthProvider = ({ children }) => {
 
   // create user
   const creteUser = (email, password) => {
-    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   // login user email and password
   const login = (email, password) => {
-    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   // sing up gmail
   const singUpWithGmail = () => {
-    setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
 
   // logout
   const logout = () => {
-    setLoading(true);
     return signOut(auth);
   };
   // update profile
-  const updateUserProfile = ({ name, photoURL }) => {
-    return updateProfile(auth, auth.currentUser, {
+  const updateUserProfile = (name, photoURL) => {
+    return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photoURL,
     });

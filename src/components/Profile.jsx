@@ -51,7 +51,7 @@ export const Profile = ({ user }) => {
           <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
             {/* Sidebar content here */}
             <li>
-              <a>Profile</a>
+              <a href="/update_profile">Profile</a>
             </li>
             <li>
               <a>Order</a>

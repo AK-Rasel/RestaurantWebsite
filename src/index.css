@@ -20,7 +20,7 @@ header {
   @apply text-4xl md:text-5xl font-bold my-2 leading-snug;
 }
 .heartStar {
-  z-index: 10001;
+  z-index: 1000;
   border-radius: 0px 20px 0px 20px;
 }
 .footer_link {
