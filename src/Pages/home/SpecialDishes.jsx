@@ -32,7 +32,7 @@ const SpecialDishes = () => {
   const [recipes, setRecipes] = useState([]);
   const slider = useRef(null);
   useEffect(() => {
-    fetch("./json/menu.json")
+    fetch("http://localhost:5000/menu")
       .then((res) => res.json())
       .then((data) => {
         const specials = data?.filter((item) => item.category === "popular");

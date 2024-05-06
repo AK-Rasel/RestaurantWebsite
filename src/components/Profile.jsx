@@ -30,14 +30,25 @@ export const Profile = ({ user }) => {
               className="btn btn-ghost btn-circle avatar"
             >
               <div className="w-10 rounded-full">
-                <img
+                {/* <img
                   alt="Tailwind CSS Navbar component"
                   src={
                     user.photoURL
                       ? user.photoURL
                       : "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
                   }
-                />
+                /> */}
+                {user?.photoURL ? (
+                  <img
+                    alt="Tailwind CSS Navbar component"
+                    src={user.photoURL}
+                  />
+                ) : (
+                  <img
+                    src="https://i.ibb.co/Rg5S6tq/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes-thumbnail.png"
+                    alt="Tailwind CSS Navbar component"
+                  />
+                )}
               </div>
             </div>
           </label>

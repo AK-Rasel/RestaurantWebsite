@@ -12,12 +12,23 @@ const Main = () => {
   const { loading, user } = useContext(AuthContext);
   return (
     <div>
-      <Navbar />
-      <div className="min-h-screen">
-        <Outlet />
-      </div>
-      <Footer />
-      <Toaster className="z-50" position="bottom-left" reverseOrder={false} />
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <div>
+          {" "}
+          <Navbar />
+          <div className="min-h-screen">
+            <Outlet />
+          </div>
+          <Footer />
+          <Toaster
+            className="z-50"
+            position="bottom-left"
+            reverseOrder={false}
+          />
+        </div>
+      )}
     </div>
   );
 };
