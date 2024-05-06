@@ -24,25 +24,30 @@ const AuthProvider = ({ children }) => {
 
   // create user
   const creteUser = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   // login user email and password
   const login = (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   // sing up gmail
   const singUpWithGmail = () => {
+    setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
 
   // logout
   const logout = () => {
+    setLoading(true);
     return signOut(auth);
   };
   // update profile
   const updateUserProfile = (name, photoURL) => {
+    setLoading(true);
     return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photoURL,
@@ -52,18 +57,17 @@ const AuthProvider = ({ children }) => {
   // check singed user
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      // console.log(currentUser);
+      setUser(currentUser);
       if (currentUser) {
-        setLoading(false);
-        setUser(currentUser);
-        // ...
-      } else {
-        // User is signed out
-        // ...
+        const userInfo = { email: currentUser.email };
       }
-      return () => {
-        return unsubscribe();
-      };
+      setLoading(false);
     });
+
+    return () => {
+      return unsubscribe();
+    };
   }, []);
 
   const authInfo = {

@@ -6,6 +6,7 @@ import "../index.css";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthProvider";
 import { Toaster } from "react-hot-toast";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const Main = () => {
   const { loading, user } = useContext(AuthContext);
