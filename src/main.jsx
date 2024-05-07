@@ -7,7 +7,6 @@ import AuthProvider from "./context/AuthProvider.jsx";
 // tanstack query
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { getTodos, postTodo } from "../my-api";
 
 // Create a client
 const queryClient = new QueryClient();

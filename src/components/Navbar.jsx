@@ -5,11 +5,15 @@ import Modal from "./Modal";
 import { AuthContext } from "../context/AuthProvider";
 import { Profile } from "./Profile";
 import { Link } from "react-router-dom";
+import useCart from "../hooks/useCart";
 
 const Navbar = () => {
   const [isSticky, setSticky] = useState(false);
   const { user } = useContext(AuthContext);
-  console.log(user);
+  // console.log(user);
+  const [cart] = useCart();
+  // console.log(cart);
+
   // handle scroll handle functions
   useEffect(() => {
     const scrollHandle = () => {
@@ -159,7 +163,7 @@ const Navbar = () => {
                       />
                     </svg>
                     <span className="badge badge-sm py-[10px] bg-orange indicator-item">
-                      0
+                      {cart?.length || 0}
                     </span>
                   </div>
                 </label>

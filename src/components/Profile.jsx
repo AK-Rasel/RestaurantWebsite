@@ -16,7 +16,7 @@ export const Profile = ({ user }) => {
       });
     });
   };
-  console.log(user);
+  // console.log(user);
   return (
     <div>
       <div className="drawer drawer-end z-50">
