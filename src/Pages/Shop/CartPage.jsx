@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 import useCart from "../../hooks/useCart";
 import { FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../context/AuthProvider";
+
 const CartPage = () => {
   const [cart, refetch] = useCart();
-  // console.log(cart);
+  const { user } = useContext(AuthContext);
+  // Increase function
+
+  const handleIncrease = (item) => {
+    console.log(item._id);
+  };
+  // Decrease function
+  const handleDecrease = (item) => {
+    console.log(item._id);
+  };
   // delete function
   const handleDelete = (item) => {
+    console.log(item._id);
     // console.log(item);
     Swal.fire({
       title: "Are you sure?",
@@ -48,6 +60,7 @@ const CartPage = () => {
         </div>
       </div>
       {/* banner -----end */}
+
       {/* table for cart-----start */}
       <div>
         <div className="overflow-x-auto">
@@ -92,7 +105,29 @@ const CartPage = () => {
                     </div>
                   </td>
                   <td className="font-medium">{item?.name}</td>
-                  <td>{item.quantity}</td>
+                  {/* quantity  */}
+                  <td>
+                    {/* Decrease dtn */}
+                    <button
+                      onClick={() => handleDecrease(item)}
+                      className="btn btn-xs"
+                    >
+                      -
+                    </button>
+                    <input
+                      className="w-10 mx-2 text-center overflow-hidden[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                      type="number"
+                      value={item.quantity}
+                      onChange={() => console.log(item.quantity)}
+                    />
+                    {/* Increase  dtn */}
+                    <button
+                      onClick={() => handleIncrease(item)}
+                      className="btn btn-xs"
+                    >
+                      +
+                    </button>
+                  </td>
                   <td>{item.price}</td>
                   <th>
                     <button
@@ -109,6 +144,22 @@ const CartPage = () => {
         </div>
       </div>
       {/* table for cart-----end */}
+
+      {/* Customer details */}
+      <div className=" my-12 flex flex-col md:flex-row justify-between items-center">
+        <div className="md:w-1/2 space-y-3">
+          <h3 className="font-medium"> Customer Details</h3>
+          <p>Name : {user?.displayName}</p>
+          <p>Email : {user?.email}</p>
+          <p>User id : {user?.uid}</p>
+        </div>
+        <div className="md:w-1/2 space-y-3">
+          <h3 className="font-medium"> Shopping Details</h3>
+          <p>Total Item: {cart.length}</p>
+          <p>Total Price: $ 0.00</p>
+          <button className="btn bg-orange ">Proceed CheckOut</button>
+        </div>
+      </div>
     </div>
   );
 };
