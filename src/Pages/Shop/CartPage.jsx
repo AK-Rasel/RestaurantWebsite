@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import useCart from "../../hooks/useCart";
 import { FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
@@ -7,15 +7,73 @@ import { AuthContext } from "../../context/AuthProvider";
 const CartPage = () => {
   const [cart, refetch] = useCart();
   const { user } = useContext(AuthContext);
-  // Increase function
-
-  const handleIncrease = (item) => {
-    console.log(item._id);
+  const [cartItems, setCartItems] = useState([]);
+  // calculate price
+  const calculatePrice = (item) => {
+    return item.price * item.quantity;
   };
+  // calculate Total Price
+  const totalCartPrice = cart.reduce((total, item) => {
+    return total + calculatePrice(item);
+  }, 0);
+  const orderPrice = totalCartPrice;
+  // Increase function
+  const handleIncrease = (item) => {
+    fetch(`http://localhost:5000/carts/${item._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+      body: JSON.stringify({ quantity: item.quantity + 1 }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const updatedCart = cartItems?.map((cartItem) => {
+          if (cartItem.id === item.id) {
+            return {
+              ...cartItem,
+              quantity: cartItem.quantity + 1,
+            };
+          }
+          refetch();
+          return cartItem;
+        });
+        setCartItems(updatedCart);
+        refetch();
+        console.log(data);
+      });
+    refetch();
+  };
+
   // Decrease function
   const handleDecrease = (item) => {
-    console.log(item._id);
+    if (item.quantity > 1) {
+      fetch(`http://localhost:5000/carts/${item._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+        body: JSON.stringify({ quantity: item.quantity - 1 }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          const updatedCart = cartItems?.map((cartItem) => {
+            if (cartItem.id === item.id) {
+              return {
+                ...cartItem,
+                quantity: cartItem.quantity - 1,
+              };
+            }
+
+            return cartItem;
+          });
+          setCartItems(updatedCart);
+          refetch();
+          // console.log(data);
+        });
+    }
   };
+
   // delete function
   const handleDelete = (item) => {
     console.log(item._id);
@@ -128,7 +186,7 @@ const CartPage = () => {
                       +
                     </button>
                   </td>
-                  <td>{item.price}</td>
+                  <td>$ {calculatePrice(item).toFixed(2)}</td>
                   <th>
                     <button
                       onClick={() => handleDelete(item)}
@@ -156,7 +214,7 @@ const CartPage = () => {
         <div className="md:w-1/2 space-y-3">
           <h3 className="font-medium"> Shopping Details</h3>
           <p>Total Item: {cart.length}</p>
-          <p>Total Price: $ 0.00</p>
+          <p>Total Price: ${orderPrice.toFixed(2)}</p>
           <button className="btn bg-orange ">Proceed CheckOut</button>
         </div>
       </div>

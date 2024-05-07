@@ -14,6 +14,7 @@ const Cards = ({ item, w96 }) => {
   const handleHeartClick = () => {
     setIsHeartFilled(!isHeartFilled);
   };
+
   // carts function
   const handelCarts = () => {
     if (user && user.email) {
