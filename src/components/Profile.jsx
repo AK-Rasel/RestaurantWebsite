@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../context/AuthProvider";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
 export const Profile = ({ user }) => {
@@ -68,7 +68,7 @@ export const Profile = ({ user }) => {
               <a>Order</a>
             </li>
             <li>
-              <a>Setting</a>
+              <Link to="/dashboard">Dashboard</Link>
             </li>
             <li>
               <button

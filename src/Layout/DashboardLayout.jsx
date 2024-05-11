@@ -79,7 +79,7 @@ function DashboardLayout() {
           <div className="flex items-center justify-between my-4 mx-4">
             <label
               htmlFor="my-drawer-2"
-              className="btn bg-orange text-xl drawer-button lg:hidden"
+              className="btn bg-orange text-xl drawer-button md:hidden"
             >
               <FiMenu />
             </label>
