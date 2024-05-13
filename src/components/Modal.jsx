@@ -4,10 +4,13 @@ import { FaFacebook, FaGit, FaGithub, FaGoogle } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthProvider";
 import toast from "react-hot-toast";
+import axios from "axios";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 const Modal = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const { singUpWithGmail, login } = useContext(AuthContext);
+  const publicAxios = useAxiosPublic();
   // redirection to home or specify page
   const location = useLocation();
   const navigate = useNavigate();
@@ -22,11 +25,17 @@ const Modal = () => {
     singUpWithGmail()
       .then((result) => {
         const user = result.user;
-
-        toast.success("login successfully");
-        console.log(user);
-        document.getElementById("my_modal_5").close();
-        navigate(from, { replace: true });
+        const userInfo = {
+          name: result?.user?.displayName,
+          email: result?.user?.email,
+        };
+        publicAxios.post("/users", userInfo).then((res) => {
+          toast.success("sing successfully");
+          navigate("/");
+        });
+        // toast.success("login successfully");
+        // navigate(from, { replace: true });
+        // console.log(user);
       })
       .catch((error) => {
         console.log(error.message);
@@ -40,9 +49,15 @@ const Modal = () => {
     login(email, password)
       .then((result) => {
         const user = result.user;
+        const userInfo = {
+          name: data.name,
+          email: data.email,
+        };
+        publicAxios.post("/users", userInfo).then((res) => {
+          toast.success("Login successfully");
+          navigate(from, { replace: true });
+        });
 
-        toast.success("login successfully");
-        navigate(from, { replace: true });
         document.getElementById("my_modal_5").close();
         console.log(user);
       })

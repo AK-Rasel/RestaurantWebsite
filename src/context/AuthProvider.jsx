@@ -13,6 +13,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import app from "../firebase/firebase.config";
+import axios from "axios";
 
 // import---end
 const auth = getAuth(app);
@@ -57,17 +58,26 @@ const AuthProvider = ({ children }) => {
   // check singed user
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      // console.log(currentUser);
       setUser(currentUser);
+      setLoading(false); // Set loading to false after user status is determined
       if (currentUser) {
         const userInfo = { email: currentUser.email };
+        axios
+          .post("http://localhost:5000/jwt", userInfo)
+          .then((res) => {
+            if (res.data.token) {
+              localStorage.setItem("Token", res.data.token);
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching JWT token:", error);
+          });
+      } else {
+        localStorage.removeItem("Token");
       }
-      setLoading(false);
     });
 
-    return () => {
-      return unsubscribe();
-    };
+    return unsubscribe;
   }, []);
 
   const authInfo = {

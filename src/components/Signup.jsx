@@ -1,25 +1,35 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Modal from "./Modal";
 import { AuthContext } from "../context/AuthProvider";
 import toast from "react-hot-toast";
+import axios from "axios";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 const Signup = () => {
   // google login
-  const { singUpWithGmail, creteUser } = useContext(AuthContext);
+  const { singUpWithGmail, creteUser, updateUserProfile, loading } =
+    useContext(AuthContext);
+  const publicAxios = useAxiosPublic();
   // redirection to home or specify page
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
+  // gmail login
   const handelEmailLogin = () => {
     singUpWithGmail()
       .then((result) => {
         const user = result.user;
+        const userInfo = {
+          name: result?.user?.displayName,
+          email: result?.user?.email,
+        };
+        publicAxios.post("/users", userInfo).then((res) => {});
         toast.success("login successfully");
         navigate(from, { replace: true });
-        console.log(user);
+        // console.log(user);
       })
       .catch((error) => {
         console.log(error.message);
@@ -34,14 +44,23 @@ const Signup = () => {
   } = useForm();
   // create user
   const onSubmit = (data) => {
+    const name = data.name;
     const email = data.email;
     const password = data.password;
+    const photoURL = data.photoURL;
     console.log(email, password);
     creteUser(email, password)
       .then((result) => {
         const user = result.user;
-        toast.success("sing successfully");
-        navigate(from, { replace: true });
+        updateUserProfile(name).then(() => {
+          const userInfo = {
+            name: data.name,
+            email: data.email,
+          };
+          publicAxios.post("/users", userInfo).then((res) => {});
+          toast.success("sing successfully");
+          navigate(from, { replace: true });
+        });
       })
       .catch((err) => {
         toast.error("This didn't work.");
@@ -51,6 +70,7 @@ const Signup = () => {
         // alert(errorCode);
       });
   };
+
   return (
     <div className="max-w-lg pb-10 mt-56 bg-white shadow w-full mx-auto flex items-center justify-center my-40">
       <div className="modal-action mt-0 flex flex-col justify-center">
@@ -60,6 +80,17 @@ const Signup = () => {
           method="dialog"
         >
           <h3 className="font-bold">Create a New Account</h3>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Name</span>
+            </label>
+            <input
+              type="text"
+              placeholder="name"
+              className="input input-bordered"
+              {...register("name")}
+            />
+          </div>
           <div className="form-control">
             <label className="label">
               <span className="label-text">Email</span>

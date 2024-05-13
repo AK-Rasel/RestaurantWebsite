@@ -10,7 +10,7 @@ import useCart from "../hooks/useCart";
 const Navbar = () => {
   const [isSticky, setSticky] = useState(false);
   const { user } = useContext(AuthContext);
-  // console.log(user);
+  console.log(user);
   const [cart, refetch] = useCart();
   // console.log(cart);
   refetch();

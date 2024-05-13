@@ -11,9 +11,9 @@ export const Profile = ({ user }) => {
   const handleLogout = () => {
     logout().then((result) => {
       navigate("/signup");
-      toast.success("Successfully Logout").catch((error) => {
-        alert("logout failed");
-      });
+      // toast.success("Successfully Logout").catch((error) => {
+      //   alert("logout failed");
+      // });
     });
   };
   // console.log(user);

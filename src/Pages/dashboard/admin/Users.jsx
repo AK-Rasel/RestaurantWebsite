@@ -1,15 +1,49 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { FaTrashAlt, FaUsers } from "react-icons/fa";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 const Users = () => {
+  const axiosSecure = useAxiosSecure();
   const { refetch, data: users = [] } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/users");
-      return res.json();
+      const res = await axiosSecure.get("/users");
+      return res.data;
     },
   });
 
+  const handleMakeAdmin = (user) => {
+    axiosSecure.patch(`/users/admin/${user._id}`).then((res) => {
+      alert(`${user.name} is now admin`);
+      refetch();
+    });
+  };
+  // user delete
+  const handelUserDelete = (user) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/users/${user._id}`).then((res) => {
+          console.log();
+
+          Swal.fire({
+            title: "Deleted!",
+            text: res.data.message,
+            icon: "success",
+          });
+          refetch();
+        });
+      }
+    });
+  };
   return (
     <div>
       <div className="flex items-center justify-between m-4">
@@ -32,7 +66,7 @@ const Users = () => {
           <tbody>
             {/* row 1 */}
             {users?.map((user, index) => (
-              <tr key={users}>
+              <tr key={index}>
                 <th>{index + 1}</th>
                 <td className="text-transform: capitalize">{user.name}</td>
                 <td>{user.email}</td>
@@ -40,13 +74,19 @@ const Users = () => {
                   {user.role === "admin" ? (
                     "admin"
                   ) : (
-                    <button className="btn btn-sm btn-circle  bg-indigo-500 ">
+                    <button
+                      onClick={() => handleMakeAdmin(user)}
+                      className="btn btn-sm btn-circle  bg-indigo-500 "
+                    >
                       <FaUsers className="text-xl text-white" />
                     </button>
                   )}
                 </td>
                 <td>
-                  <button className="btn btn-xs text-white hover:bg-orange hover:text-black bg-red p-">
+                  <button
+                    onClick={() => handelUserDelete(user)}
+                    className="btn btn-xs text-white hover:bg-orange hover:text-black bg-red p-"
+                  >
                     <FaTrashAlt />
                   </button>
                 </td>
