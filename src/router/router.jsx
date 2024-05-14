@@ -10,6 +10,7 @@ import CartPage from "../Pages/Shop/CartPage";
 import DashboardLayout from "../Layout/DashboardLayout";
 import { Dashboard } from "../Pages/dashboard/admin/Dashboard";
 import Users from "../Pages/dashboard/admin/Users";
+import AddMenu from "../Pages/dashboard/admin/AddMenu";
 
 const router = createBrowserRouter([
   {
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
       {
         path: "users",
         element: <Users />,
+      },
+      {
+        path: "menu-add",
+        element: <AddMenu />,
       },
     ],
   },

@@ -37,7 +37,7 @@ function DashboardLayout() {
         </Link>
       </li>
       <li>
-        <Link to="">
+        <Link to="/dashboard/menu-add">
           <AiFillPlusSquare /> Add Menu
         </Link>
       </li>
