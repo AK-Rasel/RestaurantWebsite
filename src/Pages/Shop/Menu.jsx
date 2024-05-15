@@ -63,7 +63,7 @@ const Menu = () => {
         break;
       case "high-to-low":
         // code block
-        sortItems.sort((a, b) => a.name.localeCompare(b.name));
+        sortItems.sort((a, b) => b.price - a.price);
         break;
       default:
         // code block

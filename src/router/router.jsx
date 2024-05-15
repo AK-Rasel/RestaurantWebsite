@@ -61,11 +61,19 @@ const router = createBrowserRouter([
       },
       {
         path: "users",
-        element: <Users />,
+        element: (
+          <PrivateRouter>
+            <Users />
+          </PrivateRouter>
+        ),
       },
       {
         path: "menu-add",
-        element: <AddMenu />,
+        element: (
+          <PrivateRouter>
+            <AddMenu />
+          </PrivateRouter>
+        ),
       },
     ],
   },

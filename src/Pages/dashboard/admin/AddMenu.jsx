@@ -2,14 +2,70 @@ import React from "react";
 import bgImage from "../../../../public/image/Add background/dark-surface-with-blank-space-fast-food-menu.jpg";
 import { FaUtensils } from "react-icons/fa";
 import { useForm } from "react-hook-form";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
+
 const AddMenu = () => {
+  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
+    reset,
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+
+  const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+  const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+
+  const onSubmit = async (data) => {
+    try {
+      // Ensure the file is available
+      const imageFile = data.image[0];
+      if (!imageFile) {
+        throw new Error("No image file provided");
+      }
+
+      // Prepare FormData
+      const formData = new FormData();
+      formData.append("image", imageFile);
+
+      // Send the request
+      const imageHosting = await axiosPublic.post(image_hosting_api, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      if (imageHosting.data.status) {
+        const menuItem = {
+          name: data.name,
+          recipe: data.recipe,
+          image: imageHosting.data.data.display_url,
+          category: data.category,
+          price: parseFloat(data.price),
+        };
+
+        // Ensure the menu item is uploaded successfully
+        const uploadMenuItem = await axiosSecure.post("/menu", menuItem);
+
+        if (uploadMenuItem.status === 200) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Your Menu Item added successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          reset();
+        }
+      }
+    } catch (error) {
+      console.error("Error uploading image or menu item:", error);
+    }
+  };
   return (
     <div>
       {/* Banner image */}
