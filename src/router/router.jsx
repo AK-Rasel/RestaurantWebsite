@@ -11,6 +11,8 @@ import DashboardLayout from "../Layout/DashboardLayout";
 import { Dashboard } from "../Pages/dashboard/admin/Dashboard";
 import Users from "../Pages/dashboard/admin/Users";
 import AddMenu from "../Pages/dashboard/admin/AddMenu";
+import MenageItems from "../Pages/dashboard/admin/MenageItems";
+import UpdateItem from "../Pages/dashboard/admin/UpdateItem";
 
 const router = createBrowserRouter([
   {
@@ -74,6 +76,24 @@ const router = createBrowserRouter([
             <AddMenu />
           </PrivateRouter>
         ),
+      },
+      {
+        path: "menage-item",
+        element: (
+          <PrivateRouter>
+            <MenageItems />
+          </PrivateRouter>
+        ),
+      },
+      {
+        path: "update-menu/:id",
+        element: (
+          <PrivateRouter>
+            <UpdateItem />
+          </PrivateRouter>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/menu/${params.id}`),
       },
     ],
   },

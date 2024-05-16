@@ -42,7 +42,7 @@ function DashboardLayout() {
         </Link>
       </li>
       <li>
-        <Link to="">
+        <Link to="/dashboard/menage-item">
           <RiFileEditFill /> Manage Items
         </Link>
       </li>
@@ -94,7 +94,6 @@ function DashboardLayout() {
             </div>
             {/* all pages ----start*/}
             <div className="mt-5 md:mt-2 mx-4">
-              {" "}
               <Outlet />
             </div>
             {/* all pages -----end*/}
