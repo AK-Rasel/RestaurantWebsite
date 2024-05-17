@@ -1,12 +1,18 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { FaUtensils } from "react-icons/fa";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import bgImage from "../../../../public/image/Add background/dark-surface-with-blank-space-fast-food-menu.jpg";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const UpdateItem = () => {
+  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const { category, image, name, price, recipe, _id } = useLoaderData();
-  //   const { category, image, name, price, recipe, _id } = menuItem;
-  console.log(name);
+  const naivete = useNavigate();
   const {
     register,
     handleSubmit,
@@ -14,8 +20,49 @@ const UpdateItem = () => {
     formState: { errors },
     reset,
   } = useForm();
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
+    try {
+      const imageFile = data.image[0];
+      if (!imageFile) {
+        throw new Error("No image file provided");
+      }
+
+      // prepare FromData
+      const formData = new FormData();
+      formData.append("image", imageFile);
+
+      // send the request
+      const imageHosting = await axiosPublic.post(image_hosting_api, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      if (imageHosting.data.status) {
+        const menuItem = {
+          name: data.name,
+          recipe: data.recipe,
+          image: imageHosting.data.data.display_url,
+          category: data.category,
+          price: parseFloat(data.price),
+        };
+
+        const updateMenuItem = await axiosSecure.put(`/menu/${_id}`, menuItem);
+
+        if (updateMenuItem.status) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Your Menu Item Update successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          naivete("/dashboard/menage-item");
+        }
+      }
+    } catch (error) {
+      console.error("Error uploading image or menu item:", error);
+    }
   };
   return (
     <div>
@@ -42,6 +89,7 @@ const UpdateItem = () => {
                 <span className="label-text">Recipe Name</span>
               </label>
               <input
+                defaultValue={name}
                 type="text"
                 {...register("name", { required: true })}
                 placeholder="Recipe Name"
@@ -56,7 +104,7 @@ const UpdateItem = () => {
                   <span className="label-text">Category</span>
                 </label>
                 <select
-                  defaultValue="default"
+                  defaultValue={category}
                   {...register("category", { required: true })}
                   className="select select-bordered w-full"
                 >
@@ -78,9 +126,10 @@ const UpdateItem = () => {
                 </label>
                 <input
                   type="number"
+                  defaultValue={price}
                   {...register("price", { required: true })}
                   placeholder="Price"
-                  className="input input-bordered w-full "
+                  className="input input-bordered w-full arrow-hide"
                 />
               </div>
             </div>
@@ -90,6 +139,7 @@ const UpdateItem = () => {
                 <span className="label-text">Recipe Details</span>
               </label>
               <textarea
+                defaultValue={recipe}
                 {...register("recipe", { required: true })}
                 className="textarea textarea-bordered w-full"
                 placeholder="Bio"

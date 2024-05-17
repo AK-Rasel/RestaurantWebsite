@@ -36,3 +36,7 @@ header {
   font-family: "Dancing Script", cursive;
   font-optical-sizing: auto;
 }
+
+.arrow-hide {
+  @apply [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none;
+}
