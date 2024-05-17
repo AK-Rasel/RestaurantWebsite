@@ -5,28 +5,28 @@ import Slider from "react-slick";
 import Cards from "../../components/Cards";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
-const simpleNextArrow = (props) => {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{ ...style, display: "block", background: "red" }}
-    >
-      NEXT
-    </div>
-  );
-};
-const simplePrevArrow = (props) => {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{ ...style, display: "block", background: "green" }}
-    >
-      BACK
-    </div>
-  );
-};
+// const simpleNextArrow = (props) => {
+//   const { className, style, onClick } = props;
+//   return (
+//     <div
+//       className={className}
+//       style={{ ...style, display: "block", background: "red" }}
+//     >
+//       NEXT
+//     </div>
+//   );
+// };
+// const simplePrevArrow = (props) => {
+//   const { className, style, onClick } = props;
+//   return (
+//     <div
+//       className={className}
+//       style={{ ...style, display: "block", background: "green" }}
+//     >
+//       BACK
+//     </div>
+//   );
+// };
 
 const SpecialDishes = () => {
   const [recipes, setRecipes] = useState([]);
@@ -76,8 +76,8 @@ const SpecialDishes = () => {
         },
       },
     ],
-    nextArrow: <simpleNextArrow />,
-    prevArrow: <simplePrevArrow />,
+    // nextArrow: <simpleNextArrow />,
+    // prevArrow: <simplePrevArrow />,
   };
   return (
     <div className="section-container my-20 relative ">

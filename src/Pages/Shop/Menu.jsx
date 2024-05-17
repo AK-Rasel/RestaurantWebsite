@@ -76,7 +76,10 @@ const Menu = () => {
   const indexOfLastItem = currentPage * itemPerPage;
   const indexOfFirstItem = indexOfLastItem - itemPerPage;
   const currentItems = filteredItem.slice(indexOfFirstItem, indexOfLastItem);
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo({ top: 500, behavior: "smooth" });
+  };
   return (
     <div>
       <div className="section-container bg-gradient-r from-[#FAFAFA] from-0% to-[#FCFCFC] to-100% m-0">

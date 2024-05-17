@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import useMenu from "../../../hooks/useMenu";
 import bgImage from "../../../../public/image/Add background/dark-surface-with-blank-space-fast-food-menu.jpg";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-
+const ITEMS_PER_PAGE = 10;
 const MenageItems = () => {
   const [menu, isLoading, refetch] = useMenu();
   // console.log(menu);
+  const [currentPage, setCurrentPage] = useState(0);
   const axiosSecure = useAxiosSecure();
+
   const menuDeleteHandel = (menuItem) => {
     Swal.fire({
       title: "Are you sure?",
@@ -45,6 +47,26 @@ const MenageItems = () => {
       }
     });
   };
+  // pagination
+  const handleNextPage = () => {
+    if (currentPage < Math.ceil(menu.length / ITEMS_PER_PAGE) - 1) {
+      setCurrentPage(currentPage + 1);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  const currentItems = menu.slice(
+    currentPage * ITEMS_PER_PAGE,
+    (currentPage + 1) * ITEMS_PER_PAGE
+  );
+  // console.log(currentPage);
   return (
     <div>
       {" "}
@@ -65,11 +87,11 @@ const MenageItems = () => {
       {/* Table --------------start */}
       <div className="max-w-screen-xl mx-auto">
         <div className="overflow-x-auto">
-          <table className="table">
+          <table className="table my-5">
             {/* head */}
             <thead>
-              <tr>
-                <th>#</th>
+              <tr className="bg-orange text-black ">
+                {/* <th>#</th> */}
                 <th>Image</th>
                 <th>Name</th>
                 <th>Price</th>
@@ -79,15 +101,15 @@ const MenageItems = () => {
             </thead>
             <tbody>
               {/* row 1 */}
-              {menu?.map((menuItem, index) => (
+              {currentItems?.map((menuItem, index) => (
                 <tr key={menuItem._id}>
-                  <th>
+                  {/* <th>
                     <label>{index + 1}</label>
-                  </th>
+                  </th> */}
                   <td>
                     <div className="flex items-center gap-3">
                       <div className="avatar">
-                        <div className="mask mask-squircle w-12 h-12">
+                        <div className="mask mask-squircle w-24 h-24">
                           <img
                             src={menuItem.image}
                             alt="Avatar Tailwind CSS Component"
@@ -119,6 +141,33 @@ const MenageItems = () => {
               ))}
             </tbody>
           </table>
+          {/* pagination btn */}
+          <div className="w-72 mx-auto my-10">
+            <div className="join grid grid-cols-3">
+              <button
+                onClick={handlePreviousPage}
+                disabled={currentPage === 0}
+                className="join-item btn "
+              >
+                Previous
+              </button>
+              <input
+                type="number"
+                className="join-item btn text-black"
+                value={currentPage + 1}
+                readOnly
+              />
+              <button
+                onClick={handleNextPage}
+                disabled={
+                  currentPage >= Math.ceil(menu.length / ITEMS_PER_PAGE) - 1
+                }
+                className="join-item btn "
+              >
+                Next
+              </button>
+            </div>
+          </div>
         </div>
       </div>
       {/* Table --------------end */}
