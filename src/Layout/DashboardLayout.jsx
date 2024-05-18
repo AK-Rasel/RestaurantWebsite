@@ -14,6 +14,7 @@ import { RiFileEditFill } from "react-icons/ri";
 import { FiMenu } from "react-icons/fi";
 import logo from "../../public/SVG/icon&font.svg";
 import useAdmin from "../hooks/useAdmin";
+import UserDashboardLaout from "./UserDashboardLaout";
 
 function DashboardLayout() {
   const [isAdmin] = useAdmin();
@@ -113,7 +114,7 @@ function DashboardLayout() {
           </div>
         </div>
       ) : (
-        <p>You are no admin----------</p>
+        <UserDashboardLaout />
       )}
     </div>
   );
