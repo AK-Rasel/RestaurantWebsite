@@ -3,6 +3,7 @@ import useCart from "../../hooks/useCart";
 import { FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../context/AuthProvider";
+import { Link } from "react-router-dom";
 
 const CartPage = () => {
   const [cart, refetch] = useCart();
@@ -40,7 +41,6 @@ const CartPage = () => {
         });
         setCartItems(updatedCart);
         refetch();
-        console.log(data);
       });
     refetch();
   };
@@ -215,7 +215,9 @@ const CartPage = () => {
           <h3 className="font-medium"> Shopping Details</h3>
           <p>Total Item: {cart.length}</p>
           <p>Total Price: ${orderPrice.toFixed(2)}</p>
-          <button className="btn bg-orange ">Proceed CheckOut</button>
+          <Link to="/proceed-checkOut">
+            <button className="btn bg-orange ">Proceed CheckOut</button>
+          </Link>
         </div>
       </div>
     </div>

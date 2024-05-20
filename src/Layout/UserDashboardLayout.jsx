@@ -14,9 +14,8 @@ import { AiFillPlusSquare } from "react-icons/ai";
 import { RiFileEditFill } from "react-icons/ri";
 import { FiMenu } from "react-icons/fi";
 import logo from "../../public/SVG/icon&font.svg";
-import useAdmin from "../hooks/useAdmin";
 
-const UserDashboardLaout = () => {
+const UserDashboardLayout = () => {
   const sidebar = (
     <>
       <li>
@@ -131,4 +130,4 @@ const UserDashboardLaout = () => {
   );
 };
 
-export default UserDashboardLaout;
+export default UserDashboardLayout;
