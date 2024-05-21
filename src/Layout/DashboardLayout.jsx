@@ -33,7 +33,7 @@ function DashboardLayout() {
         </Link>
       </li>
       <li>
-        <Link to="">
+        <Link to="/dashboard/menage-bookings">
           <FaShoppingBag /> Manage Bookings
         </Link>
       </li>

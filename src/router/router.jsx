@@ -15,6 +15,7 @@ import MenageItems from "../Pages/dashboard/admin/MenageItems";
 import UpdateItem from "../Pages/dashboard/admin/UpdateItem";
 import Payment from "../Pages/Shop/Payment";
 import Order from "../Pages/dashboard/Order";
+import MenageBookings from "../Pages/dashboard/admin/MenageBookings";
 
 const router = createBrowserRouter([
   {
@@ -100,6 +101,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRouter>
             <MenageItems />
+          </PrivateRouter>
+        ),
+      },
+      {
+        path: "menage-bookings",
+        element: (
+          <PrivateRouter>
+            <MenageBookings />
           </PrivateRouter>
         ),
       },
