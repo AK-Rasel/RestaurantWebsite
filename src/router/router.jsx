@@ -14,6 +14,7 @@ import AddMenu from "../Pages/dashboard/admin/AddMenu";
 import MenageItems from "../Pages/dashboard/admin/MenageItems";
 import UpdateItem from "../Pages/dashboard/admin/UpdateItem";
 import Payment from "../Pages/Shop/Payment";
+import Order from "../Pages/dashboard/Order";
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRouter>
             <UpdateProfile />
+          </PrivateRouter>
+        ),
+      },
+      {
+        path: "order",
+        element: (
+          <PrivateRouter>
+            <Order />
           </PrivateRouter>
         ),
       },

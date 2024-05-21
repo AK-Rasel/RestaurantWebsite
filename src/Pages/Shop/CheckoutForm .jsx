@@ -4,7 +4,8 @@ import React, { useEffect, useState } from "react";
 import { FaPaypal } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-
+import Swal from "sweetalert2";
+import { Navigate, useNavigate } from "react-router-dom";
 // eslint-disable-next-line react/prop-types
 const CheckoutForm = ({ price, cart }) => {
   const [cardError, setCardError] = useState("");
@@ -13,7 +14,10 @@ const CheckoutForm = ({ price, cart }) => {
   const stripe = useStripe();
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
+
   // console.log(price);
+
   useEffect(() => {
     if ((typeof price !== "number", price < 1)) {
       console.log(price, "price is not valid");
@@ -62,9 +66,38 @@ const CheckoutForm = ({ price, cart }) => {
         setCardError(confirmError.message);
       } else {
         console.log(paymentIntent);
-        alert("Payment successful!");
+
         if (paymentIntent.status === "succeeded") {
           setCardError(`Your transaction is ${paymentIntent.id}`);
+          const paymentInfo = {
+            email: user.email,
+            transactionId: paymentIntent.id,
+            price,
+            quantity: cart.length,
+            status: "order pending",
+            itemName: cart.map((item) => item.name),
+            cartItem: cart.map((item) => item._id),
+            menuItem: cart.map((item) => item.menuItemId),
+          };
+
+          // sent info back end
+          axiosSecure.post("/payment", paymentInfo).then((res) => {
+            console.log(res.data);
+            if (
+              res.data.acknowledged ||
+              res.data.deleteCartRequest.acknowledged
+            ) {
+              Swal.fire({
+                position: "top-center",
+                icon: "success",
+                title: "Payment successful!",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              // refetch();
+              navigate("/order");
+            }
+          });
         }
       }
     }

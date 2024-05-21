@@ -65,7 +65,7 @@ export const Profile = ({ user }) => {
               <a href="/update_profile">Profile</a>
             </li>
             <li>
-              <a>Order</a>
+              <a href="/order">Order</a>
             </li>
             <li>
               <Link to="/dashboard">Dashboard</Link>

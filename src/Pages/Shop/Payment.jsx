@@ -8,7 +8,7 @@ import CheckoutForm from "./CheckoutForm ";
 const stripePromise = loadStripe(import.meta.env.VITE_API_KEY_STRIPE);
 
 const Payment = () => {
-  const [cart] = useCart();
+  const [cart, refetch] = useCart();
   // const cartTotal = cart.reduce((sum, item) => sum + item.price, 0);
 
   // calculate price
@@ -24,7 +24,7 @@ const Payment = () => {
   return (
     <div className="section-container my-28">
       <Elements stripe={stripePromise}>
-        <CheckoutForm price={totalPrice} cart={cart} />
+        <CheckoutForm price={totalPrice} cart={cart} refetch={refetch} />
       </Elements>
     </div>
   );
