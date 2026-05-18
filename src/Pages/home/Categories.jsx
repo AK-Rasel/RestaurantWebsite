@@ -26,7 +26,7 @@ const Categories = () => {
     },
   ];
   return (
-    <div className="section-container py-12">
+    <div className="section-container py-12 ">
       {/* Heading start ------ */}
       <div className="text-center">
         <p className="subtitle">Customer Favorites</p>

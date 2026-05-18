@@ -1,6 +1,5 @@
-import React from "react";
-
 const Footer = () => {
+  const year = new Date().getFullYear();
   return (
     <div>
       <footer className="footer section-container justify-between xl:px-24 px-4 py-10 ">
@@ -70,7 +69,7 @@ const Footer = () => {
           </a>
         </nav>
         <aside className="items-center grid-flow-col">
-          <p>Copyright © 2024 - All right reserved</p>
+          <p>Copyright © {year} - All right reserved</p>
         </aside>
       </footer>
     </div>

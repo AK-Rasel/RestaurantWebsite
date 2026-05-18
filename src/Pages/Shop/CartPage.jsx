@@ -20,13 +20,16 @@ const CartPage = () => {
   const orderPrice = totalCartPrice;
   // Increase function
   const handleIncrease = (item) => {
-    fetch(`http://localhost:5000/carts/${item._id}`, {
-      method: "PUT",
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
+    fetch(
+      `https://restaurant-website-foody-server.vercel.app/carts/${item._id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+        body: JSON.stringify({ quantity: item.quantity + 1 }),
       },
-      body: JSON.stringify({ quantity: item.quantity + 1 }),
-    })
+    )
       .then((res) => res.json())
       .then((data) => {
         const updatedCart = cartItems?.map((cartItem) => {
@@ -48,13 +51,16 @@ const CartPage = () => {
   // Decrease function
   const handleDecrease = (item) => {
     if (item.quantity > 1) {
-      fetch(`http://localhost:5000/carts/${item._id}`, {
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
+      fetch(
+        `https://restaurant-website-foody-server.vercel.app/carts/${item._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+          body: JSON.stringify({ quantity: item.quantity - 1 }),
         },
-        body: JSON.stringify({ quantity: item.quantity - 1 }),
-      })
+      )
         .then((res) => res.json())
         .then((data) => {
           const updatedCart = cartItems?.map((cartItem) => {
@@ -88,9 +94,12 @@ const CartPage = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/carts/${item._id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://restaurant-website-foody-server.vercel.app/carts/${item._id}`,
+          {
+            method: "DELETE",
+          },
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount > 0) {

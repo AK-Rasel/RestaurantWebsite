@@ -32,7 +32,7 @@ const SpecialDishes = () => {
   const [recipes, setRecipes] = useState([]);
   const slider = useRef(null);
   useEffect(() => {
-    fetch("http://localhost:5000/menu")
+    fetch("https://restaurant-website-foody-server.vercel.app/menu")
       .then((res) => res.json())
       .then((data) => {
         const specials = data?.filter((item) => item.category === "popular");

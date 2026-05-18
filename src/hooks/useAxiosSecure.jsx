@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "./useAuth";
 
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://restaurant-website-foody-server.vercel.app/",
 });
 
 const useAxiosSecure = () => {
@@ -21,7 +21,7 @@ const useAxiosSecure = () => {
     function (error) {
       // Do something with request error
       return Promise.reject(error);
-    }
+    },
   );
 
   // Add a response interceptor
@@ -38,7 +38,7 @@ const useAxiosSecure = () => {
         navigate("/signup");
       }
       return Promise.reject(error);
-    }
+    },
   );
 
   return axiosSecure;

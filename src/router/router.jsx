@@ -120,7 +120,9 @@ const router = createBrowserRouter([
           </PrivateRouter>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/menu/${params.id}`),
+          fetch(
+            `https://restaurant-website-foody-server.vercel.app/menu/${params.id}`,
+          ),
       },
     ],
   },

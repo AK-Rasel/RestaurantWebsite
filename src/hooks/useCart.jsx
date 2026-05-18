@@ -9,10 +9,10 @@ const useCart = () => {
     queryKey: ["cart", user?.email],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/carts?email=${user?.email}`,
+        `https://restaurant-website-foody-server.vercel.app/carts?email=${user?.email}`,
         {
           headers: { authorization: `Bearer ${token}` },
-        }
+        },
       );
       if (!res.ok) {
         throw new Error("Network response was not ok");

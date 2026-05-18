@@ -63,7 +63,10 @@ const AuthProvider = ({ children }) => {
       if (currentUser) {
         const userInfo = { email: currentUser.email };
         axios
-          .post("http://localhost:5000/jwt", userInfo)
+          .post(
+            "https://restaurant-website-foody-server.vercel.app/jwt",
+            userInfo,
+          )
           .then((res) => {
             if (res.data.token) {
               localStorage.setItem("Token", res.data.token);
